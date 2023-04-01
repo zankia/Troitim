@@ -11,17 +11,20 @@ public class Application extends JavaPlugin {
 
         var executor = new TCommand(this);
         var tabCompleter = new TCommandTab(this);
-        PluginCommand listCommand = getCommand("list");
-        listCommand.setExecutor(executor);
-        listCommand.setTabCompleter(tabCompleter);
-        PluginCommand setupCommand = getCommand("setup");
-        setupCommand.setExecutor(executor);
-        setupCommand.setTabCompleter(tabCompleter);
-        PluginCommand troitimCommand = getCommand("troitim");
-        troitimCommand.setExecutor(executor);
-        troitimCommand.setTabCompleter(tabCompleter);
+        registerCommand("list", executor, tabCompleter);
+        registerCommand("setup", executor, tabCompleter);
+        registerCommand("troitim", executor, tabCompleter);
 
         getLogger().info("Enabled");
+    }
+
+    private void registerCommand(String list, TCommand executor, TCommandTab tabCompleter) {
+        PluginCommand command = getCommand(list);
+        if (command == null) {
+            return;
+        }
+        command.setExecutor(executor);
+        command.setTabCompleter(tabCompleter);
     }
 
     @Override
