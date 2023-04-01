@@ -6,8 +6,6 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.command.TabCompleter;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,7 +19,7 @@ public class TCommandTab implements TabCompleter {
     }
 
     @Override
-    public @Nullable List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String alias, @NotNull String[] args) {
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args) {
         if (!command.testPermission(sender)) {
             sender.sendMessage(ChatColor.RED + TCommand.NO_PERMISSION);
             return null;
@@ -33,8 +31,7 @@ public class TCommandTab implements TabCompleter {
         };
     }
 
-    @NotNull
-    private List<String> getCommandList(@NotNull CommandSender sender, @NotNull String[] args) {
+    private List<String> getCommandList(CommandSender sender, String[] args) {
         if (args.length < 2) {
             return List.of("list", "setup", "reload");
         }
@@ -45,7 +42,7 @@ public class TCommandTab implements TabCompleter {
         return command.tabComplete(sender, args[0], Arrays.copyOfRange(args, 1, args.length));
     }
 
-    private List<String> getTeamsList(@NotNull String[] args) {
+    private List<String> getTeamsList(String[] args) {
         if (args.length != 1) {
             return Collections.emptyList();
         }

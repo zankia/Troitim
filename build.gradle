@@ -3,7 +3,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'java'
 
 group 'fr.zankia.troitim'
-version '0.1'
+version '0.2'
 description 'Troitim super concept'
 
 configurations {
@@ -11,12 +11,13 @@ configurations {
 }
 
 repositories {
-    maven { url = 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url = 'https://hub.spigotmc.org/nexus/content/repositories/snapshots/' }
     maven { url = 'https://jitpack.io' }
+    mavenCentral()
 }
 
 dependencies {
-    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
+    compileOnly 'org.spigotmc:spigot-api:1.19.3-R0.1-SNAPSHOT'
     compileOnly 'com.github.booksaw:BetterTeams:4.6.4'
 }
 

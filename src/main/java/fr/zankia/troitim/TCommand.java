@@ -9,7 +9,6 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Arrays;
 
@@ -25,7 +24,7 @@ public class TCommand implements CommandExecutor {
     }
 
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String name, String[] args) {
+    public boolean onCommand(CommandSender sender, Command command, String name, String[] args) {
         if (!command.testPermission(sender)) {
             sender.sendMessage(NO_PERMISSION);
             return true;
@@ -39,7 +38,7 @@ public class TCommand implements CommandExecutor {
     }
 
 
-    private boolean listCommand(@NotNull CommandSender sender) {
+    private boolean listCommand(CommandSender sender) {
         sender.sendMessage(PREFIX);
         ConfigurationSection config = plugin.getConfig().getConfigurationSection(Utils.BLOCKS);
         if (config == null) {
@@ -49,7 +48,7 @@ public class TCommand implements CommandExecutor {
         return true;
     }
 
-    private boolean setupCommand(@NotNull CommandSender sender, @NotNull String[] args) {
+    private boolean setupCommand(CommandSender sender, String[] args) {
         if (args.length != 1) {
             return false;
         }
@@ -78,7 +77,7 @@ public class TCommand implements CommandExecutor {
         return true;
     }
 
-    private boolean troitimCommand(@NotNull CommandSender sender, @NotNull String[] args) {
+    private boolean troitimCommand(CommandSender sender, String[] args) {
         if (args.length < 1) {
             return false;
         }

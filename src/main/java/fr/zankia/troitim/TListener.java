@@ -1,7 +1,7 @@
 package fr.zankia.troitim;
 
 import com.booksaw.betterTeams.Team;
-import net.kyori.adventure.text.Component;
+import org.bukkit.BanList;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -45,10 +45,14 @@ public class TListener implements Listener {
         Arrays.stream(plugin.getServer().getOfflinePlayers()).forEach(player -> {
             Team playerTeam = Team.getTeam(player);
             if (team.equals(playerTeam)) {
-                plugin.getLogger().info("Banning " + player.getName());
-                player.banPlayer("Tu as perdu.");
+                String name = player.getName();
+                if (name == null) {
+                    return;
+                }
+                plugin.getLogger().info("Banning " + name);
+                plugin.getServer().getBanList(BanList.Type.NAME).addBan(name, "Tu as perdu.", null, null);
                 if (player.isOnline()) {
-                    ((Player) player).kick(Component.text("Tu as perdu."));
+                    ((Player) player).kickPlayer("Tu as perdu.");
                 }
             }
         });
