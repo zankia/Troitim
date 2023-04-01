@@ -1,0 +1,38 @@
+name: @name@
+main: @main@
+description: @description@
+version: @version@
+api-version: @api@
+author: @author@
+depend:
+  - BetterTeams
+
+commands:
+  list:
+    description: Lists registered blocks
+    usage: /troitim list
+    permission: troitim.list
+  setup:
+    description: Adds a block to a team.
+    usage: /troitim setup [team]
+    permission: troitim.setup
+  troitim:
+    description: Plugin management command.
+    usage: /troitim <reload | list | setup>
+    permission: troitim.admin
+
+permissions:
+  troitim.*:
+    children:
+      troitim.list: true
+      troitim.setup: true
+      troitim.admin: true
+  troitim.list:
+    description: Allows usage of list command.
+  troitim.setup:
+    description: Allows usage of setup command.
+  troitim.admin:
+    description: Allows managing the plugin.
+    children:
+      troitim.setup: true
+      trotim.list: true

@@ -1,0 +1,32 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+apply plugin: 'java'
+
+group 'fr.zankia.troitim'
+version '0.1'
+description 'Troitim super concept'
+
+configurations {
+    jar.archiveName = project.name + '.jar'
+}
+
+repositories {
+    maven { url = 'https://papermc.io/repo/repository/maven-public/' }
+    maven { url = 'https://jitpack.io' }
+}
+
+dependencies {
+    compileOnly 'io.papermc.paper:paper-api:1.18.1-R0.1-SNAPSHOT'
+    compileOnly 'com.github.booksaw:BetterTeams:4.6.4'
+}
+
+processResources {
+    filter(ReplaceTokens, tokens: [
+            name: project.name,
+            main: project.group + '.Application',
+            description: project.description,
+            version: version,
+            api: '1.16',
+            author: 'zankia'
+    ])
+}
